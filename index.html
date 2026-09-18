@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>タスク管理アプリ - TaskFlow</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -51,7 +50,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-          <i class="fa-solid font-bold fa-check-double text-lg"></i>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div>
           <h1 class="font-bold text-xl text-slate-900 leading-tight">TaskFlow</h1>
@@ -63,7 +62,7 @@
       <div id="auth-section" class="flex items-center">
         <!-- Loading Auth Spinner -->
         <div id="auth-loading" class="flex items-center space-x-2 text-slate-500 text-sm">
-          <i class="fa-solid fa-circle-notch fa-spin text-blue-600"></i>
+          <svg class="w-4 h-4 animate-spin text-blue-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
           <span>読み込み中...</span>
         </div>
 
@@ -88,7 +87,7 @@
             <p id="user-email" class="text-xs text-slate-500 leading-tight mt-0.5"></p>
           </div>
           <button id="btn-logout" title="ログアウト" class="text-slate-400 hover:text-red-600 p-2 rounded-lg hover:bg-slate-100 transition-colors">
-            <i class="fa-solid fa-right-from-bracket text-lg"></i>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
           </button>
         </div>
       </div>
@@ -100,20 +99,128 @@
     <!-- Unauthenticated View -->
     <div id="view-unauth" class="hidden max-w-md mx-auto my-12 text-center bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
       <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-        <i class="fa-solid fa-lock"></i>
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
       </div>
       <h2 class="text-2xl font-bold text-slate-900 mb-2">ログインが必要です</h2>
       <p class="text-slate-600 text-sm mb-6">タスクを作成・管理するには、Googleアカウントでサインインしてください。データは安全にFirestoreに同期されます。</p>
       
       <div class="space-y-3">
         <button id="btn-login-hero" class="w-full flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all">
-          <i class="fa-brands fa-google text-lg"></i>
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="#ffffff" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#ffffff" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          </svg>
           <span>Googleポップアップでログイン</span>
         </button>
 
         <button id="btn-login-redirect" class="w-full flex items-center justify-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-xs transition-all">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
           <span>画面移動（リダイレクト）でログイン</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Authenticated Main View -->
+    <div id="view-app" class="hidden space-y-6">
+
+      <!-- Statistics Dashboard -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">総タスク数</p>
+            <p id="stat-total" class="text-2xl font-bold text-slate-900">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">進行中</p>
+            <p id="stat-pending" class="text-2xl font-bold text-slate-900">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">完了済み</p>
+            <p id="stat-completed" class="text-2xl font-bold text-slate-900">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center text-xl font-bold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">高優先度</p>
+            <p id="stat-high" class="text-2xl font-bold text-slate-900">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+        <!-- Search input -->
+        <div class="relative w-full md:w-80">
+          <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input type="text" id="input-search" placeholder="タスクを検索..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+        </div>
+
+        <!-- Filter tabs & Actions -->
+        <div class="flex flex-wrap items-center justify-between w-full md:w-auto gap-3">
+          <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-medium text-slate-600">
+            <button class="filter-btn active bg-white text-slate-900 shadow-sm px-3 py-1.5 rounded-lg transition-all" data-status="all">すべて</button>
+            <button class="filter-btn hover:text-slate-900 px-3 py-1.5 rounded-lg transition-all" data-status="todo">未着手</button>
+            <button class="filter-btn hover:text-slate-900 px-3 py-1.5 rounded-lg transition-all" data-status="in_progress">進行中</button>
+            <button class="filter-btn hover:text-slate-900 px-3 py-1.5 rounded-lg transition-all" data-status="done">完了</button>
+          </div>
+
+          <button id="btn-open-modal" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span>新規タスク</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="task-list-container" class="space-y-3">
+        <!-- Loading Spinner -->
+        <div id="tasks-loading" class="py-12 text-center text-slate-400 flex flex-col items-center">
+          <svg class="w-8 h-8 animate-spin text-blue-600 mb-3" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+          <p class="text-sm font-medium">タスクを同期中...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="tasks-empty" class="hidden py-16 text-center bg-white rounded-2xl border border-dashed border-slate-300">
+          <div class="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-700">タスクがありません</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-4">新しいタスクを追加して作業を開始しましょう！</p>
+          <button id="btn-empty-add" class="inline-flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2 rounded-xl text-xs transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span>タスクを追加</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Task Items List -->
+        <div id="tasks-list" class="space-y-3"></div>
+      </div>
+    </div>
+  </main>
+
+  <div id="modal-task" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden transform transition-all">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+        <h3 id="modal-title" class="font-bold text-slate-900 text-lg">新規タスク追加</h3>
+        <button id="btn-close-modal" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
     </div>
@@ -356,7 +463,7 @@
     let searchQuery = '';
     let unsubscribeSnapshot = null;
 
-    // DOM Elements
+    // DOM Elements Declarations
     const authLoading = document.getElementById('auth-loading');
     const authLoginButtons = document.getElementById('auth-login-buttons');
     const btnLogin = document.getElementById('btn-login');
@@ -376,6 +483,52 @@
     const errorMessageText = document.getElementById('error-message-text');
     const errorSolutionList = document.getElementById('error-solution-list');
     const btnCloseErrorModal = document.getElementById('btn-close-error-modal');
+
+    const btnOpenModal = document.getElementById('btn-open-modal');
+    const btnEmptyAdd = document.getElementById('btn-empty-add');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnCancelTask = document.getElementById('btn-cancel-task');
+    const modalTask = document.getElementById('modal-task');
+    const modalTitle = document.getElementById('modal-title');
+    const formTask = document.getElementById('form-task');
+    const inputTaskId = document.getElementById('input-task-id');
+    const inputTaskTitle = document.getElementById('input-task-title');
+    const inputTaskDesc = document.getElementById('input-task-desc');
+    const selectTaskStatus = document.getElementById('select-task-status');
+    const selectTaskPriority = document.getElementById('select-task-priority');
+    const inputTaskDate = document.getElementById('input-task-date');
+    const statTotal = document.getElementById('stat-total');
+    const statPending = document.getElementById('stat-pending');
+    const statCompleted = document.getElementById('stat-completed');
+    const statHigh = document.getElementById('stat-high');
+    const tasksLoading = document.getElementById('tasks-loading');
+    const tasksEmpty = document.getElementById('tasks-empty');
+    const tasksList = document.getElementById('tasks-list');
+    const inputSearch = document.getElementById('input-search');
+
+    // Toast Notification System
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      const bgColors = {
+        success: 'bg-emerald-600 text-white',
+        error: 'bg-rose-600 text-white',
+        info: 'bg-slate-800 text-white'
+      };
+      toast.className = `px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium transition-all transform translate-y-2 opacity-0 flex items-center space-x-2 ${bgColors[type] || bgColors.info}`;
+      toast.innerHTML = `<span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
 
     function showAuthErrorModal(error) {
       const code = error.code || 'unknown';
@@ -557,7 +710,7 @@
           <div class="flex items-start space-x-3.5 flex-grow">
             <!-- Complete Checkbox -->
             <button class="btn-toggle-done mt-0.5 w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 text-transparent hover:border-emerald-500'}">
-              <i class="fa-solid fa-check text-xs"></i>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             </button>
 
             <!-- Task Content -->
@@ -574,7 +727,7 @@
 
               ${task.dueDate ? `
                 <div class="flex items-center space-x-1.5 text-xs text-slate-400 pt-1">
-                  <i class="fa-regular fa-calendar-check"></i>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                   <span>期限: ${task.dueDate}</span>
                 </div>
               ` : ''}
@@ -584,10 +737,10 @@
           <!-- Action Buttons -->
           <div class="flex items-center space-x-1 self-end sm:self-center">
             <button class="btn-edit-task p-2 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors" title="編集">
-              <i class="fa-solid fa-pen-to-square text-sm"></i>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
             </button>
             <button class="btn-delete-task p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-slate-50 transition-colors" title="削除">
-              <i class="fa-solid fa-trash-can text-sm"></i>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
             </button>
           </div>
         </div>
