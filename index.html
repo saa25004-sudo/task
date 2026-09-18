@@ -68,15 +68,17 @@
         </div>
 
         <!-- Login Button -->
-        <button id="btn-login" class="hidden flex items-center space-x-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-medium px-4 py-2 rounded-xl shadow-sm transition-all hover:shadow-md">
-          <svg class="w-5 h-5" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-          </svg>
-          <span>Googleでログイン</span>
-        </button>
+        <div id="auth-login-buttons" class="hidden flex items-center space-x-2">
+          <button id="btn-login" class="flex items-center space-x-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-medium px-3.5 py-2 rounded-xl shadow-sm transition-all text-xs sm:text-sm">
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Googleでログイン</span>
+          </button>
+        </div>
 
         <!-- User Profile Dropdown -->
         <div id="user-profile" class="hidden flex items-center space-x-3">
@@ -102,10 +104,18 @@
       </div>
       <h2 class="text-2xl font-bold text-slate-900 mb-2">ログインが必要です</h2>
       <p class="text-slate-600 text-sm mb-6">タスクを作成・管理するには、Googleアカウントでサインインしてください。データは安全にFirestoreに同期されます。</p>
-      <button id="btn-login-hero" class="w-full flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all">
-        <i class="fa-brands fa-google text-lg"></i>
-        <span>Googleアカウントで始める</span>
-      </button>
+      
+      <div class="space-y-3">
+        <button id="btn-login-hero" class="w-full flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all">
+          <i class="fa-brands fa-google text-lg"></i>
+          <span>Googleポップアップでログイン</span>
+        </button>
+
+        <button id="btn-login-redirect" class="w-full flex items-center justify-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-xs transition-all">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>画面移動（リダイレクト）でログイン</span>
+        </button>
+      </div>
     </div>
 
     <!-- Authenticated Main View -->
@@ -266,6 +276,38 @@
     </div>
   </div>
 
+  <!-- Login Error Modal -->
+  <div id="modal-auth-error" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-left border border-rose-100 space-y-4">
+      <div class="flex items-center space-x-3 text-rose-600">
+        <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-xl shrink-0">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-base leading-snug">ログインエラー</h3>
+          <p id="error-code-badge" class="text-xs font-mono text-rose-500 font-semibold"></p>
+        </div>
+      </div>
+
+      <div class="bg-rose-50/60 rounded-xl p-3.5 border border-rose-100 text-xs text-rose-800 space-y-1">
+        <p class="font-semibold">エラー詳細:</p>
+        <p id="error-message-text" class="break-words font-mono"></p>
+      </div>
+
+      <div class="space-y-2">
+        <p class="text-xs font-bold text-slate-700">💡 解決手順・対処法:</p>
+        <ul id="error-solution-list" class="text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+        </ul>
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button id="btn-close-error-modal" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs rounded-xl transition-colors">
+          閉じる
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
   <script type="module">
@@ -274,6 +316,8 @@
       getAuth, 
       GoogleAuthProvider, 
       signInWithPopup, 
+      signInWithRedirect,
+      getRedirectResult,
       signOut, 
       onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
@@ -314,8 +358,10 @@
 
     // DOM Elements
     const authLoading = document.getElementById('auth-loading');
+    const authLoginButtons = document.getElementById('auth-login-buttons');
     const btnLogin = document.getElementById('btn-login');
     const btnLoginHero = document.getElementById('btn-login-hero');
+    const btnLoginRedirect = document.getElementById('btn-login-redirect');
     const btnLogout = document.getElementById('btn-logout');
     const userProfile = document.getElementById('user-profile');
     const userAvatar = document.getElementById('user-avatar');
@@ -325,62 +371,76 @@
     const viewUnauth = document.getElementById('view-unauth');
     const viewApp = document.getElementById('view-app');
 
-    const tasksLoading = document.getElementById('tasks-loading');
-    const tasksEmpty = document.getElementById('tasks-empty');
-    const tasksList = document.getElementById('tasks-list');
+    const modalAuthError = document.getElementById('modal-auth-error');
+    const errorCodeBadge = document.getElementById('error-code-badge');
+    const errorMessageText = document.getElementById('error-message-text');
+    const errorSolutionList = document.getElementById('error-solution-list');
+    const btnCloseErrorModal = document.getElementById('btn-close-error-modal');
 
-    const statTotal = document.getElementById('stat-total');
-    const statPending = document.getElementById('stat-pending');
-    const statCompleted = document.getElementById('stat-completed');
-    const statHigh = document.getElementById('stat-high');
+    function showAuthErrorModal(error) {
+      const code = error.code || 'unknown';
+      const message = error.message || '不明なエラーが発生しました。';
 
-    const modalTask = document.getElementById('modal-task');
-    const formTask = document.getElementById('form-task');
-    const modalTitle = document.getElementById('modal-title');
-    const inputTaskId = document.getElementById('input-task-id');
-    const inputTaskTitle = document.getElementById('input-task-title');
-    const inputTaskDesc = document.getElementById('input-task-desc');
-    const selectTaskStatus = document.getElementById('select-task-status');
-    const selectTaskPriority = document.getElementById('select-task-priority');
-    const inputTaskDate = document.getElementById('input-task-date');
-    
-    const btnOpenModal = document.getElementById('btn-open-modal');
-    const btnCloseModal = document.getElementById('btn-close-modal');
-    const btnCancelTask = document.getElementById('btn-cancel-task');
-    const btnEmptyAdd = document.getElementById('btn-empty-add');
-    const inputSearch = document.getElementById('input-search');
+      errorCodeBadge.textContent = code;
+      errorMessageText.textContent = message;
 
-    function showToast(message, type = 'info') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      
-      const bgColor = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-800';
-      const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-info-circle';
+      let solutions = [];
 
-      toast.className = `${bgColor} text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center space-x-2.5 transition-all duration-300 pointer-events-auto opacity-0 transform translate-y-2`;
-      toast.innerHTML = `<i class="fa-solid ${icon}"></i><span>${message}</span>`;
-      
-      container.appendChild(toast);
+      if (code === 'auth/unauthorized-domain') {
+        const currentDomain = window.location.hostname;
+        solutions.push(`現在のドメイン (<strong>${currentDomain}</strong>) がFirebaseで許可されていません。`);
+        solutions.push(`<a href="https://console.firebase.google.com/" target="_blank" class="text-blue-600 underline">Firebase Console</a> > Authentication > Settings > <strong>承認済みドメイン (Authorized domains)</strong> に「<code>${currentDomain}</code>」を追加してください。`);
+      } else if (code === 'auth/operation-not-allowed') {
+        solutions.push(`FirebaseでGoogleログインが無効になっています。`);
+        solutions.push(`Firebase Console > Authentication > <strong>Sign-in method</strong> タブで「Google」を有効に設定してください。`);
+      } else if (code === 'auth/popup-blocked') {
+        solutions.push(`ブラウザのポップアップブロックが有効になっています。`);
+        solutions.push(`「画面移動（リダイレクト）でログイン」ボタンをお試しいただくか、ブラウザのポップアップを許可してください。`);
+      } else if (code === 'auth/popup-closed-by-user') {
+        solutions.push(`ログイン画面（ポップアップ）が途中で閉じられました。再度お試しください。`);
+      } else if (code === 'auth/cancelled-popup-request') {
+        solutions.push(`複数のログインリクエストが同時に実行されました。もう一度ボタンを押してください。`);
+      } else {
+        solutions.push(`Firebase設定（apiKey, authDomain等）が正しく構成されているかご確認ください。`);
+        solutions.push(`サードパーティCookieがブロックされている場合は、リダイレクトログインをお試しください。`);
+      }
 
-      setTimeout(() => {
-        toast.classList.remove('opacity-0', 'translate-y-2');
-      }, 10);
-
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => toast.remove(), 300);
-      }, 3500);
+      errorSolutionList.innerHTML = solutions.map(s => `<li>${s}</li>`).join('');
+      modalAuthError.classList.remove('hidden');
     }
 
-    async function handleLogin() {
+    btnCloseErrorModal.addEventListener('click', () => {
+      modalAuthError.classList.add('hidden');
+    });
+
+    async function handleLoginPopup() {
       try {
         await signInWithPopup(auth, googleProvider);
         showToast('Googleアカウントでログインしました', 'success');
       } catch (error) {
-        console.error("Login failed:", error);
-        showToast('ログインに失敗しました: ' + error.message, 'error');
+        console.error("Popup login failed:", error);
+        showAuthErrorModal(error);
       }
     }
+
+    async function handleLoginRedirect() {
+      try {
+        await signInWithRedirect(auth, googleProvider);
+      } catch (error) {
+        console.error("Redirect login failed:", error);
+        showAuthErrorModal(error);
+      }
+    }
+
+    // Check redirect result on load
+    getRedirectResult(auth).then((result) => {
+      if (result?.user) {
+        showToast('Googleアカウントでログインしました', 'success');
+      }
+    }).catch((error) => {
+      console.error("Redirect result error:", error);
+      showAuthErrorModal(error);
+    });
 
     async function handleLogout() {
       try {
@@ -393,8 +453,9 @@
       }
     }
 
-    btnLogin.addEventListener('click', handleLogin);
-    btnLoginHero.addEventListener('click', handleLogin);
+    btnLogin.addEventListener('click', handleLoginPopup);
+    btnLoginHero.addEventListener('click', handleLoginPopup);
+    if (btnLoginRedirect) btnLoginRedirect.addEventListener('click', handleLoginRedirect);
     btnLogout.addEventListener('click', handleLogout);
 
     onAuthStateChanged(auth, (user) => {
@@ -405,7 +466,7 @@
         userName.textContent = user.displayName || 'ユーザー';
         userEmail.textContent = user.email || '';
 
-        btnLogin.classList.add('hidden');
+        authLoginButtons.classList.add('hidden');
         userProfile.classList.remove('hidden');
 
         viewUnauth.classList.add('hidden');
@@ -419,7 +480,7 @@
         if (unsubscribeSnapshot) unsubscribeSnapshot();
 
         userProfile.classList.add('hidden');
-        btnLogin.classList.remove('hidden');
+        authLoginButtons.classList.remove('hidden');
 
         viewApp.classList.add('hidden');
         viewUnauth.classList.remove('hidden');
